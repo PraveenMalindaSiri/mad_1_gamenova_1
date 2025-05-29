@@ -4,6 +4,7 @@ import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/p_games_list.dart';
 import 'package:mad_1_gamenova_1/views/pages/digital_products.dart';
 import 'package:mad_1_gamenova_1/views/pages/physical_products.dart';
+import 'package:mad_1_gamenova_1/views/pages/product_view.dart';
 import 'package:mad_1_gamenova_1/views/widgets/card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -103,7 +104,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     child: GameCard(game: games[index]),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProductViewScreen(game: games[index])),
+                      );
+                    },
                   );
                 },
               ),

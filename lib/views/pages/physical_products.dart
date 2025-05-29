@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/p_games_list.dart';
+import 'package:mad_1_gamenova_1/views/pages/product_view.dart';
 import 'package:mad_1_gamenova_1/views/widgets/card.dart';
 
 class PhysicalScreen extends StatefulWidget {
@@ -56,7 +57,16 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     child: GameCard(game: games[index]),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) =>
+                                  ProductViewScreen(game: games[index]),
+                        ),
+                      );
+                    },
                   );
                 },
               ),

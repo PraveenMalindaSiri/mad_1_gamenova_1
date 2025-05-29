@@ -109,7 +109,7 @@ final List<Game> dGames = [
     ageRating: 16,
     size: 48,
     description: "Pilot titans in fast-paced mech FPS action",
-    image: '',
+    image: 'assets/images/products/digital/titanfall 2.jpeg',
     company: "Respawn Entertainment",
   ),
 
@@ -125,7 +125,7 @@ final List<Game> dGames = [
     ageRating: 12,
     size: 38,
     description: "Open-world racing across land, air, and sea",
-    image: 'assets/images/products/digital/titanfall 2.jpeg',
+    image: 'assets/images/products/digital/The Crew 2.jpeg',
     company: "Ivory Tower",
   ),
 
