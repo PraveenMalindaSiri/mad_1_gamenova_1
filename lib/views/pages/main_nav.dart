@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_1_gamenova_1/views/pages/home.dart';
 
 
 class MainNavScreen extends StatefulWidget {
@@ -11,6 +12,9 @@ class MainNavScreen extends StatefulWidget {
 class _MainNavScreenState extends State<MainNavScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(title: Text("GameNova"),),
+      body: HomeScreen(),
+    );
   }
 }

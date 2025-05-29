@@ -63,6 +63,29 @@ flutter:
   assets:
     - assets/images/
     - assets/images/main/login_img.png
+    - assets/images/main/main_img.png
+    - assets/images/main/main_img2.png
+    - assets/images/products/digital/Assassins Creed IV Black Flag.jpeg
+    - assets/images/products/digital/Divinity Original Sin 2.jpg
+    - assets/images/products/digital/Metro Exodus.jpeg
+    - assets/images/products/digital/Nioh 2.webp
+    - assets/images/products/digital/Persona 5 Royal.jpeg
+    - assets/images/products/digital/Project CARS 3.jpeg
+    - assets/images/products/digital/The Crew 2.jpeg
+    - assets/images/products/digital/Wolfenstein II The New Colossus.jpeg
+    - assets/images/products/digital/WRC 10.jpeg
+    - assets/images/products/digital/titanfall 2.jpeg
+    - assets/images/products/physical/Battlefield 2042.webp
+    - assets/images/products/physical/Call of Duty - Modern Warfare II.jpeg
+    - assets/images/products/physical/Cyberpunk-2077.jpg
+    - assets/images/products/physical/Doom Eternal.jpeg
+    - assets/images/products/physical/Forza Horizon 5.jpeg
+    - assets/images/products/physical/Gran Turismo 7.jpg
+    - assets/images/products/physical/Mass Effect.jpg
+    - assets/images/products/physical/nfs heat.webp
+    - assets/images/products/physical/Red Dead Redemption 2.jpg
+    - assets/images/products/physical/Skyrim.jpeg
+    - assets/images/products/physical/witcher3.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -69,9 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (value == null || value.isEmpty) {
                   return ("Please fill the username corectly.");
                 }
-                if (value.length < 6) {
-                  return ("Username should have at least 6 letters");
-                }
+                // if (value.length < 6) {
+                //   return ("Username should have at least 6 letters");
+                // }
                 return null;
               },
               decoration: InputDecoration(
@@ -91,9 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (value == null || value.isEmpty) {
                   return ("Please fill the password corectly.");
                 }
-                if (value.length < 8) {
-                  return ("Password should have at least 8 letters");
-                }
+                // if (value.length < 8) {
+                //   return ("Password should have at least 8 letters");
+                // }
                 return null;
               },
               obscureText: true,
@@ -109,8 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ElevatedButton(
             onPressed: () {
               if (formkey.currentState!.validate()) {
-                if (UsernameCnt.text == "Praveen" &&
-                    PassCnt.text == "123123123") {
+                if (UsernameCnt.text == "123" &&
+                    PassCnt.text == "123") {
                   setState(() {
                     error = null;
                   });
