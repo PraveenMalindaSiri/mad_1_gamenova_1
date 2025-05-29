@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mad_1_gamenova_1/core/d_games_list%20.dart';
+import 'package:mad_1_gamenova_1/core/p_games_list.dart';
+import 'package:mad_1_gamenova_1/views/widgets/card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,15 +60,104 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildPhysicalSection() {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Container(
+        decoration: BoxDecoration(color: Colors.blueAccent),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Physical Editions",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(onPressed: () {}, child: Text("See more...")),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 10)),
+            SizedBox(
+              height: 350,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: GameCard(game: pGames[index]),
+                    onTap: () {},
+                  );
+                },
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 10)),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildDigitalSection() {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Container(
+        decoration: BoxDecoration(color: Colors.blueAccent),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Digital Editions",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(onPressed: () {}, child: Text("See more...")),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 10)),
+            SizedBox(
+              height: 350,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: GameCard(game: dGames[index]),
+                    onTap: () {},
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child: Column(children: [_buildIntro()]));
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildIntro(),
+          _buildPhysicalSection(),
+          _buildDigitalSection(),
+        ],
+      ),
+    );
   }
 }
