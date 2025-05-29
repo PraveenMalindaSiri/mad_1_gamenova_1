@@ -14,6 +14,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final EmailCnt = TextEditingController();
   final AgeCnt = TextEditingController();
   final PassCnt = TextEditingController();
+  String? $success;
 
   final formkey = GlobalKey<FormState>();
 
@@ -29,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: UsernameCnt,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return ("Please fill the username corectly.");
+                  return ("Please fill the Username corectly.");
                 }
                 if (value.length < 6) {
                   return ("Username should have at least 6 letters");
@@ -51,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: PassCnt,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return ("Please fill the password corectly.");
+                  return ("Please fill the Password corectly.");
                 }
                 if (value.length < 8) {
                   return ("Password should have at least 8 letters");
@@ -101,6 +102,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 if (value.length < 9) {
                   return ("Email should have at least 10 letters");
                 }
+                if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                  return "Please enter a valid email address.";
+                }
                 return null;
               },
               decoration: InputDecoration(
@@ -116,13 +120,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
             width: 500,
             child: TextFormField(
               controller: AgeCnt,
+              keyboardType: TextInputType.number,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return ("Please fill the Age corectly.");
                 }
-                if (value.length < 9) {
-                  return ("Age should be higher than 10");
+
+                final age = int.tryParse(value);
+
+                if (age == null) {
+                  return ("Age must be a number.");
                 }
+                if (age < 9) {
+                  return ("Age must be higher than 9.");
+                }
+
                 return null;
               },
               decoration: InputDecoration(
@@ -137,8 +149,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ElevatedButton(
             onPressed: () {
               if (formkey.currentState!.validate()) {
-                if (UsernameCnt.text == "Praveen" &&
-                    PassCnt.text == "123123123") {}
+                setState(() {
+                  $success =
+                      "'${NameCnt.text}' registered as '${UsernameCnt.text}' successfully";
+                });
               }
             },
             child: Text(
@@ -146,6 +160,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
             ),
           ),
+
+          Padding(padding: EdgeInsets.only(bottom: 10)),
+          if ($success != null)
+            Text(
+              $success!,
+              style: TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
 
           Padding(padding: EdgeInsets.only(bottom: 10)),
           TextButton(
@@ -166,10 +190,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [_buildForm(context)],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [_buildForm(context)],
+          ),
         ),
       ),
     );

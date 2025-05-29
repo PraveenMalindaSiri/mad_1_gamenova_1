@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Image.asset(
           "assets/images/main/login_img.png",
           fit: BoxFit.fill,
-          height: 400,
+          width: 400,
         ),
       ),
     );
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           // username
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: UsernameCnt,
               validator: (value) {
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           // password
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: PassCnt,
               validator: (value) {
@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth > 1000) {
+              if (constraints.maxWidth > 800) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
