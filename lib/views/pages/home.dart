@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/d_games_list%20.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/p_games_list.dart';
@@ -67,7 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
+        decoration: BoxDecoration(
+          color: AppColors.darkGray,
+        ),
         child: Column(
           children: [
             Padding(
@@ -90,7 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(builder: (context) => screen),
                       );
                     },
-                    child: Text("See more..."),
+                    child: Text(
+                      "See more...",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
                   ),
                 ],
               ),
@@ -107,7 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => ProductViewScreen(game: games[index])),
+                        MaterialPageRoute(
+                          builder:
+                              (context) =>
+                                  ProductViewScreen(game: games[index]),
+                        ),
                       );
                     },
                   );
@@ -127,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           _buildIntro(),
           _buildEditionSection('Physical Editions', pGames, PhysicalScreen()),
-          _buildEditionSection("Editions Editions", dGames, DigitalScreen()),
+          _buildEditionSection("Digital Editions", dGames, DigitalScreen()),
         ],
       ),
     );

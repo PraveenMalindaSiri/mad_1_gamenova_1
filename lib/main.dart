@@ -14,16 +14,28 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      darkTheme: ThemeData.dark(),
-      theme: ThemeData.light().copyWith(
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.darkSkyBlue,
+          primary: AppColors.darkSkyBlue,
+          secondary: AppColors.darkGray,
+          brightness: Brightness.dark,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: AppColors.skyBlue,
+        ),
+      ),
+      theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.skyBlue,
           primary: AppColors.skyBlue,
-          secondary: AppColors.neon,
+          secondary: AppColors.darkGray2,
+          brightness: Brightness.light,
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: AppColors.skyBlue,
+          backgroundColor: AppColors.skyBlue,
+          foregroundColor: Colors.white,
         ),
       ),
       home: LoginScreen(),

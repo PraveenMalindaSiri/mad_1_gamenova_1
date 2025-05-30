@@ -1,16 +1,12 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
-import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 
 class GameCard extends StatelessWidget {
   final Game game;
 
-  const GameCard({
-    super.key,
-    required this.game
-  });
+  const GameCard({super.key, required this.game});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +17,7 @@ class GameCard extends StatelessWidget {
         height: 300,
         constraints: BoxConstraints(maxWidth: 200, maxHeight: 400),
         decoration: BoxDecoration(
-          color:  AppColors.darkGray,
+          color: const Color.fromARGB(255, 11, 43, 69),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Column(

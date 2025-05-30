@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/p_games_list.dart';
 import 'package:mad_1_gamenova_1/views/pages/product_view.dart';
@@ -34,7 +35,7 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
+        decoration: BoxDecoration(color: AppColors.darkGray),
         child: Column(
           children: [
             Padding(
