@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
+import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 
 class GameCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class GameCard extends StatelessWidget {
         height: 300,
         constraints: BoxConstraints(maxWidth: 200, maxHeight: 400),
         decoration: BoxDecoration(
-          color: Colors.black54,
+          color:  AppColors.darkGray,
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Column(

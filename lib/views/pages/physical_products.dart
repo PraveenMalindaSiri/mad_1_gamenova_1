@@ -34,7 +34,7 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        decoration: BoxDecoration(color: Colors.blueAccent),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
         child: Column(
           children: [
             Padding(

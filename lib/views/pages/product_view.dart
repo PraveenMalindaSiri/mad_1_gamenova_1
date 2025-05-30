@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/views/widgets/button.dart';
 
@@ -74,7 +75,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
 
   Widget buildPortrait() {
     return Container(
-      decoration: BoxDecoration(color: Colors.black87),
+      decoration: BoxDecoration(color: AppColors.darkGray),
       child: Column(
         children: [
           Text(
@@ -153,13 +154,13 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                   final amount = int.parse(AmountCnt.text);
                   addToWishlist(amount);
                 }
-              }, Colors.cyan),
+              }, Theme.of(context).colorScheme.secondary),
               MyButton("Add To Cart", () {
                 if (formkey.currentState!.validate()) {
                   final amount = int.parse(AmountCnt.text);
                   addToCart(amount);
                 }
-              }, Colors.cyan),
+              }, Theme.of(context).colorScheme.secondary),
             ],
           ),
         ],
@@ -169,7 +170,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
 
   Widget buildLandscape() {
     return Container(
-      decoration: BoxDecoration(color: Colors.black87),
+      decoration: BoxDecoration(color: AppColors.darkGray),
       child: Column(
         children: [
           Row(
@@ -261,13 +262,13 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                   final amount = int.parse(AmountCnt.text);
                   addToWishlist(amount);
                 }
-              }, Colors.cyan),
+              }, Theme.of(context).colorScheme.secondary),
               MyButton("Add To Cart", () {
                 if (formkey.currentState!.validate()) {
                   final amount = int.parse(AmountCnt.text);
                   addToCart(amount);
                 }
-              }, Colors.cyan),
+              }, Theme.of(context).colorScheme.secondary),
             ],
           ),
         ],
