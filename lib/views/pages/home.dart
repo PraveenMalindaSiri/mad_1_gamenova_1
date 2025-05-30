@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/colors.dart';
-import 'package:mad_1_gamenova_1/core/d_games_list%20.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
-import 'package:mad_1_gamenova_1/core/p_games_list.dart';
+import 'package:mad_1_gamenova_1/core/games_lists.dart';
 import 'package:mad_1_gamenova_1/views/pages/digital_products.dart';
 import 'package:mad_1_gamenova_1/views/pages/physical_products.dart';
 import 'package:mad_1_gamenova_1/views/pages/product_view.dart';

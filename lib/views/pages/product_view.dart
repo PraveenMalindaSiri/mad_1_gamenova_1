@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
+import 'package:mad_1_gamenova_1/core/games_lists.dart';
+import 'package:mad_1_gamenova_1/views/pages/cart.dart';
+import 'package:mad_1_gamenova_1/views/pages/wishlist.dart';
 import 'package:mad_1_gamenova_1/views/widgets/button.dart';
 
 class ProductViewScreen extends StatefulWidget {
@@ -26,12 +29,23 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
     );
   }
 
-  void addToWishlist(int amount) {
-    print("Wishlist: ${amount}");
+  void addToWishlist(int amount, Game game) {
+    if (wishlistGames.containsKey(game)) {
+      wishlistGames[game] = wishlistGames[game]! + amount;
+    } else {
+      wishlistGames[game] = amount;
+    }
   }
 
-  void addToCart(int amount) {
-    print("Cart: ${amount}");
+  void addToCart(int amount, Game game) {
+    // cheking if the key is in the list before adding
+    if (cartGames.containsKey(game)) {
+      // if exists update the amount
+      cartGames[game] = cartGames[game]! + amount;
+    } else {
+      // else add the new item
+      cartGames[game] = amount;
+    }
   }
 
   Widget buildAmount() {
@@ -152,15 +166,38 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               MyButton("Add To Wishlist", () {
                 if (formkey.currentState!.validate()) {
                   final amount = int.parse(AmountCnt.text);
-                  addToWishlist(amount);
+                  addToWishlist(amount, widget.game);
                 }
               }, Theme.of(context).colorScheme.secondary),
               MyButton("Add To Cart", () {
                 if (formkey.currentState!.validate()) {
                   final amount = int.parse(AmountCnt.text);
-                  addToCart(amount);
+                  addToCart(amount, widget.game);
                 }
               }, Theme.of(context).colorScheme.secondary),
+            ],
+          ),
+
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => WishlistScreen()),
+                  );
+                },
+                child: Text("Wishlist"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => CartScreen()),
+                  );
+                },
+                child: Text("Cart"),
+              ),
             ],
           ),
         ],
@@ -260,15 +297,38 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               MyButton("Add To Wishlist", () {
                 if (formkey.currentState!.validate()) {
                   final amount = int.parse(AmountCnt.text);
-                  addToWishlist(amount);
+                  addToWishlist(amount, widget.game);
                 }
-              }, Theme.of(context).colorScheme.secondary),
+              }, Colors.black),
               MyButton("Add To Cart", () {
                 if (formkey.currentState!.validate()) {
                   final amount = int.parse(AmountCnt.text);
-                  addToCart(amount);
+                  addToCart(amount, widget.game);
                 }
-              }, Theme.of(context).colorScheme.secondary),
+              }, Colors.black),
+            ],
+          ),
+
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => WishlistScreen()),
+                  );
+                },
+                child: Text("Wishlist"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => CartScreen()),
+                  );
+                },
+                child: Text("Cart"),
+              ),
             ],
           ),
         ],
