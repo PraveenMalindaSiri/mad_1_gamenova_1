@@ -4,6 +4,7 @@ import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/games_lists.dart';
 import 'package:mad_1_gamenova_1/views/pages/product_view.dart';
 import 'package:mad_1_gamenova_1/views/widgets/card.dart';
+import 'package:mad_1_gamenova_1/views/widgets/subnav.dart';
 
 class PhysicalScreen extends StatefulWidget {
   const PhysicalScreen({super.key});
@@ -88,6 +89,7 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
           if (shooterGames.isNotEmpty)
             _buildGenreSection("Shooter Games", shooterGames),
           if (carGames.isNotEmpty) _buildGenreSection("Car Games", carGames),
+          buildSubNav(context),
         ],
       ),
     );
