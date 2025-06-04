@@ -85,6 +85,14 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Text(
+              "Physical Editions",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
             if (rpgGames.isNotEmpty) _buildGenreSection("RPG Games", rpgGames),
             if (shooterGames.isNotEmpty)
               _buildGenreSection("Shooter Games", shooterGames),

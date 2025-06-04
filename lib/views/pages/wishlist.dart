@@ -63,7 +63,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
                 Text(
-                  "Rs.${game.price}",
+                  "Rs.${game.price * amount}",
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ],
@@ -116,7 +116,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
                 Text(
-                  "Rs.${game.price}",
+                  "Rs.${game.price * amount}",
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
                 MyButton("Remove", () => remove(game), Colors.white),

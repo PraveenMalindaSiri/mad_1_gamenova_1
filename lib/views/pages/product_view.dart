@@ -334,6 +334,17 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
     );
   }
 
+  Widget goBack() {
+    return Container(
+      child: TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Icon(Icons.arrow_back, color: AppColors.skyBlue, size: 30,),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -341,10 +352,16 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
         child: SingleChildScrollView(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth > 800) {
-                return buildPortrait();
+              if (constraints.maxWidth < 800) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [goBack(), buildPortrait()],
+                );
               } else {
-                return buildLandscape();
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [goBack(), buildLandscape()],
+                );
               }
             },
           ),

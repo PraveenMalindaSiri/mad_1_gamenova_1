@@ -12,6 +12,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  double totalPrice = 0;
+
   void remove(Game game) {
     setState(() {
       cartGames.remove(game);
@@ -52,7 +54,7 @@ class _CartScreenState extends State<CartScreen> {
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
                 Text(
-                  "Rs.${game.price}",
+                  "Rs.${game.price * amount}",
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ],
@@ -95,7 +97,7 @@ class _CartScreenState extends State<CartScreen> {
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
                 Text(
-                  "Rs.${game.price}",
+                  "Rs.${game.price * amount}",
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
                 MyButton("Remove", () => remove(game), Colors.white),
@@ -107,36 +109,50 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
+  Widget buildTotalPrice() {
+    return Text(
+      "Total Price: ${totalPrice.toString()}",
+      style: TextStyle(fontSize: 30),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final entries = cartGames.entries.toList();
+    totalPrice = 0;
+    entries.forEach((entry) {
+      totalPrice += (entry.key.price * entry.value);
+    });
     if (entries.isEmpty) {
-      return Center(
-        child: Container(
-          child: Text("No Cart Items"),
-        ),
-      );
+      return Center(child: Container(child: Text("No Cart Items")));
     } else {
       return Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            return ListView.builder(
-              itemCount: entries.length,
-              itemBuilder: (context, index) {
-                if (constraints.maxWidth > 800) {
-                  return buildLandscapeItem(
-                    entries[index].key,
-                    entries[index].value,
+        body: Column(
+          children: [
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return ListView.builder(
+                    itemCount: entries.length,
+                    itemBuilder: (context, index) {
+                      if (constraints.maxWidth > 800) {
+                        return buildLandscapeItem(
+                          entries[index].key,
+                          entries[index].value,
+                        );
+                      } else {
+                        return buildPortraitItem(
+                          entries[index].key,
+                          entries[index].value,
+                        );
+                      }
+                    },
                   );
-                } else {
-                  return buildPortraitItem(
-                    entries[index].key,
-                    entries[index].value,
-                  );
-                }
-              },
-            );
-          },
+                },
+              ),
+            ),
+            buildTotalPrice(),
+          ],
         ),
       );
     }
