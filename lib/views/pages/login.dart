@@ -109,14 +109,15 @@ class _LoginScreenState extends State<LoginScreen> {
           ElevatedButton(
             onPressed: () {
               if (formkey.currentState!.validate()) {
-                if (UsernameCnt.text == "123" &&
-                    PassCnt.text == "123") {
+                if (UsernameCnt.text == "123" && PassCnt.text == "123") {
                   setState(() {
                     error = null;
                   });
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => MainNavScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => MainNavScreen(selectPageIndex: 0),
+                    ),
                   );
                 } else {
                   setState(() {

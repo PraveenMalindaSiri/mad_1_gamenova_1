@@ -67,9 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.darkGray,
-        ),
+        decoration: BoxDecoration(color: AppColors.darkGray),
         child: Column(
           children: [
             Padding(
@@ -131,13 +129,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildIntro(),
-          _buildEditionSection('Physical Editions', pGames, PhysicalScreen()),
-          _buildEditionSection("Digital Editions", dGames, DigitalScreen()),
-        ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildIntro(),
+            _buildEditionSection('Physical Editions', pGames, PhysicalScreen()),
+            _buildEditionSection("Digital Editions", dGames, DigitalScreen()),
+          ],
+        ),
       ),
     );
   }

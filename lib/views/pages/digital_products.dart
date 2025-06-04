@@ -82,15 +82,17 @@ class _DigitalScreenState extends State<DigitalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          if (rpgGames.isNotEmpty) _buildGenreSection("RPG Games", rpgGames),
-          if (shooterGames.isNotEmpty)
-            _buildGenreSection("Shooter Games", shooterGames),
-          if (carGames.isNotEmpty) _buildGenreSection("Car Games", carGames),
-          buildSubNav(context),
-        ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            if (rpgGames.isNotEmpty) _buildGenreSection("RPG Games", rpgGames),
+            if (shooterGames.isNotEmpty)
+              _buildGenreSection("Shooter Games", shooterGames),
+            if (carGames.isNotEmpty) _buildGenreSection("Car Games", carGames),
+            buildSubNav(context),
+          ],
+        ),
       ),
     );
   }

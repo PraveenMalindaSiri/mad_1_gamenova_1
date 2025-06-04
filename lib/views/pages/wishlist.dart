@@ -144,25 +144,27 @@ class _WishlistScreenState extends State<WishlistScreen> {
         ),
       );
     } else {
-      return LayoutBuilder(
-        builder: (context, constraints) {
-          return ListView.builder(
-            itemCount: entries.length,
-            itemBuilder: (context, index) {
-              if (constraints.maxWidth > 800) {
-                return buildLandscapeItem(
-                  entries[index].key,
-                  entries[index].value,
-                );
-              } else {
-                return buildPortraitItem(
-                  entries[index].key,
-                  entries[index].value,
-                );
-              }
-            },
-          );
-        },
+      return Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return ListView.builder(
+              itemCount: entries.length,
+              itemBuilder: (context, index) {
+                if (constraints.maxWidth > 800) {
+                  return buildLandscapeItem(
+                    entries[index].key,
+                    entries[index].value,
+                  );
+                } else {
+                  return buildPortraitItem(
+                    entries[index].key,
+                    entries[index].value,
+                  );
+                }
+              },
+            );
+          },
+        ),
       );
     }
   }
