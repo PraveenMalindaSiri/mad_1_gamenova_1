@@ -139,7 +139,6 @@ class _WishlistScreenState extends State<WishlistScreen> {
     if (entries.isEmpty) {
       return Center(
         child: Container(
-          decoration: BoxDecoration(color: AppColors.darkSkyBlue),
           child: Text("No Wishlist Items"),
         ),
       );

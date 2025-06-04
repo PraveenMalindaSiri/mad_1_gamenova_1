@@ -113,7 +113,6 @@ class _CartScreenState extends State<CartScreen> {
     if (entries.isEmpty) {
       return Center(
         child: Container(
-          decoration: BoxDecoration(color: AppColors.darkSkyBlue),
           child: Text("No Cart Items"),
         ),
       );

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/games_lists.dart';
-import 'package:mad_1_gamenova_1/views/pages/cart.dart';
-import 'package:mad_1_gamenova_1/views/pages/wishlist.dart';
 import 'package:mad_1_gamenova_1/views/widgets/button.dart';
 
 class ProductViewScreen extends StatefulWidget {
@@ -178,28 +176,28 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
             ],
           ),
 
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => WishlistScreen()),
-                  );
-                },
-                child: Text("Wishlist"),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => CartScreen()),
-                  );
-                },
-                child: Text("Cart"),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     TextButton(
+          //       onPressed: () {
+          //         Navigator.pushReplacement(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => WishlistScreen()),
+          //         );
+          //       },
+          //       child: Text("Wishlist"),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {
+          //         Navigator.pushReplacement(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => CartScreen()),
+          //         );
+          //       },
+          //       child: Text("Cart"),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
@@ -309,28 +307,28 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
             ],
           ),
 
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => WishlistScreen()),
-                  );
-                },
-                child: Text("Wishlist"),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => CartScreen()),
-                  );
-                },
-                child: Text("Cart"),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     TextButton(
+          //       onPressed: () {
+          //         Navigator.pushReplacement(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => WishlistScreen()),
+          //         );
+          //       },
+          //       child: Text("Wishlist"),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {
+          //         Navigator.pushReplacement(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => CartScreen()),
+          //         );
+          //       },
+          //       child: Text("Cart"),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

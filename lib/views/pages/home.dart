@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/games_lists.dart';
-import 'package:mad_1_gamenova_1/views/pages/digital_products.dart';
-import 'package:mad_1_gamenova_1/views/pages/physical_products.dart';
+import 'package:mad_1_gamenova_1/views/pages/main_nav.dart';
 import 'package:mad_1_gamenova_1/views/pages/product_view.dart';
 import 'package:mad_1_gamenova_1/views/widgets/card.dart';
 
@@ -63,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildEditionSection(String edition, List<Game> games, Widget screen) {
+  Widget _buildEditionSection(String edition, List<Game> games) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
@@ -87,7 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => screen),
+                        MaterialPageRoute(
+                          builder:
+                              (context) => MainNavScreen(selectPageIndex: 1),
+                        ),
                       );
                     },
                     child: Text(
@@ -108,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return GestureDetector(
                     child: GameCard(game: games[index]),
                     onTap: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder:
@@ -134,8 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             _buildIntro(),
-            _buildEditionSection('Physical Editions', pGames, PhysicalScreen()),
-            _buildEditionSection("Digital Editions", dGames, DigitalScreen()),
+            _buildEditionSection('Physical Editions', pGames),
+            _buildEditionSection("Digital Editions", dGames),
           ],
         ),
       ),
