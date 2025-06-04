@@ -19,13 +19,35 @@ class _WishlistScreenState extends State<WishlistScreen> {
   }
 
   void addToCart(int amount, Game game) {
+    if (cartGames.containsKey(game) && game.type.toLowerCase() == 'digital') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Already in the Cart cannot add more Digital Editions'),
+        ),
+      );
+      return;
+    }
     // cheking if the key is in the list before adding
     if (cartGames.containsKey(game)) {
       // if exists update the amount
-      cartGames[game] = cartGames[game]! + amount;
+      setState(() {
+        cartGames[game] = cartGames[game]! + amount;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Added more ${amount.toString()} copies to the Cart'),
+        ),
+      );
     } else {
       // else add the new item
-      cartGames[game] = amount;
+      setState(() {
+        cartGames[game] = amount;
+      });
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Added to Cart')));
     }
   }
 

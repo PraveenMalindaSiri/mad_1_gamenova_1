@@ -14,7 +14,7 @@ class ProductViewScreen extends StatefulWidget {
 
 class _ProductViewScreenState extends State<ProductViewScreen> {
   int? amount;
-  final AmountCnt = TextEditingController();
+  final AmountCnt = TextEditingController(text: "1");
   final formkey = GlobalKey<FormState>();
 
   Widget myIMG(String path) {
@@ -28,21 +28,69 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
   }
 
   void addToWishlist(int amount, Game game) {
+    if (wishlistGames.containsKey(game) &&
+        game.type.toLowerCase() == 'digital') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Already in the Wishlist cannot add more Digital Editions',
+          ),
+        ),
+      );
+      return;
+    }
     if (wishlistGames.containsKey(game)) {
-      wishlistGames[game] = wishlistGames[game]! + amount;
+      setState(() {
+        wishlistGames[game] = wishlistGames[game]! + amount;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Added more ${amount.toString()} copies to the Wishlist',
+          ),
+        ),
+      );
     } else {
-      wishlistGames[game] = amount;
+      setState(() {
+        wishlistGames[game] = amount;
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Added to wishlist')));
     }
   }
 
   void addToCart(int amount, Game game) {
+    if (cartGames.containsKey(game) && game.type.toLowerCase() == 'digital') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Already in the Cart cannot add more Digital Editions'),
+        ),
+      );
+      return;
+    }
     // cheking if the key is in the list before adding
     if (cartGames.containsKey(game)) {
       // if exists update the amount
-      cartGames[game] = cartGames[game]! + amount;
+      setState(() {
+        cartGames[game] = cartGames[game]! + amount;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Added more ${amount.toString()} copies to the Cart'),
+        ),
+      );
     } else {
       // else add the new item
-      cartGames[game] = amount;
+      setState(() {
+        cartGames[game] = amount;
+      });
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Added to Cart')));
     }
   }
 
@@ -340,7 +388,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
         onPressed: () {
           Navigator.pop(context);
         },
-        child: Icon(Icons.arrow_back, color: AppColors.skyBlue, size: 30,),
+        child: Icon(Icons.arrow_back, color: AppColors.skyBlue, size: 30),
       ),
     );
   }

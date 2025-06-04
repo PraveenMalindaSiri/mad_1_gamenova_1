@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
+import 'package:mad_1_gamenova_1/views/pages/product_view.dart';
 import 'package:mad_1_gamenova_1/views/widgets/button.dart';
 
 class ItemPortraitView extends StatelessWidget {
@@ -30,13 +31,23 @@ class ItemPortraitView extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  game.image,
-                  fit: BoxFit.fill,
-                  width: 300,
-                  height: 300,
+              child: GestureDetector(
+                onDoubleTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductViewScreen(game: game),
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.asset(
+                    game.image,
+                    fit: BoxFit.fill,
+                    width: 300,
+                    height: 300,
+                  ),
                 ),
               ),
             ),
