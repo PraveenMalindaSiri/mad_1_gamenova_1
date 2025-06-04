@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/games_lists.dart';
-import 'package:mad_1_gamenova_1/views/widgets/button.dart';
+import 'package:mad_1_gamenova_1/views/widgets/itemLanscape.dart';
+import 'package:mad_1_gamenova_1/views/widgets/itemPortrait.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -18,95 +18,6 @@ class _CartScreenState extends State<CartScreen> {
     setState(() {
       cartGames.remove(game);
     });
-  }
-
-  Widget buildPortraitItem(Game game, int amount) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(color: AppColors.darkGray),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  game.image,
-                  fit: BoxFit.fill,
-                  width: 300,
-                  height: 300,
-                ),
-              ),
-            ),
-            Text(
-              game.name,
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            Padding(padding: EdgeInsets.only(bottom: 10)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  amount.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-                Text(
-                  "Rs.${game.price * amount}",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-              ],
-            ),
-            Padding(padding: EdgeInsets.only(bottom: 10)),
-            MyButton("Remove", () => remove(game), Colors.white),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildLandscapeItem(Game game, int amount) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(color: AppColors.darkGray),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  game.image,
-                  fit: BoxFit.fill,
-                  width: 300,
-                  height: 300,
-                ),
-              ),
-            ),
-            Column(
-              children: [
-                Text(
-                  game.name,
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                Text(
-                  amount.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-                Text(
-                  "Rs.${game.price * amount}",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-                MyButton("Remove", () => remove(game), Colors.white),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   Widget buildTotalPrice() {
@@ -136,14 +47,18 @@ class _CartScreenState extends State<CartScreen> {
                     itemCount: entries.length,
                     itemBuilder: (context, index) {
                       if (constraints.maxWidth > 800) {
-                        return buildLandscapeItem(
-                          entries[index].key,
-                          entries[index].value,
+                        return ItemLanscapeView(
+                          game: entries[index].key,
+                          amount: entries[index].value,
+                          isWishlist: false,
+                          onRemove: () => remove(entries[index].key),
                         );
                       } else {
-                        return buildPortraitItem(
-                          entries[index].key,
-                          entries[index].value,
+                        return ItemPortraitView(
+                          game: entries[index].key,
+                          amount: entries[index].value,
+                          isWishlist: false,
+                          onRemove: () => remove(entries[index].key),
                         );
                       }
                     },
