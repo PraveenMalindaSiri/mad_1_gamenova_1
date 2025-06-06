@@ -14,6 +14,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final EmailCnt = TextEditingController();
   final AgeCnt = TextEditingController();
   final PassCnt = TextEditingController();
+  final List<String> roles = ["Customer", "Admin", "Seller"];
+  String? SelcRole = "Customer";
   String? $success;
 
   final formkey = GlobalKey<FormState>();
@@ -145,13 +147,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
 
+          // role
+          SizedBox(
+            width: 500,
+            child: DropdownButtonFormField(
+              value: "Customer", // default value
+              items:
+                  roles.map((String role) {
+                    return DropdownMenuItem(value: role, child: Text(role));
+                  }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  SelcRole = value!;
+                });
+              },
+              validator: (value) {
+                if (value == null) {
+                  return "Please select a Role";
+                } else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Select Role",
+              ),
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
+
           // button
           ElevatedButton(
             onPressed: () {
               if (formkey.currentState!.validate()) {
                 setState(() {
                   $success =
-                      "'${NameCnt.text}' registered as '${UsernameCnt.text}' successfully";
+                      "'${NameCnt.text}' registered as '${UsernameCnt.text}' successfully and role is ${SelcRole!}";
                 });
               }
             },
@@ -192,8 +223,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [_buildForm(context)],
           ),
         ),

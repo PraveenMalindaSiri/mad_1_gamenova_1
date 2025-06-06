@@ -14,6 +14,7 @@ class ProductViewScreen extends StatefulWidget {
 
 class _ProductViewScreenState extends State<ProductViewScreen> {
   int? amount;
+  String? error;
   final AmountCnt = TextEditingController(text: "1");
   final formkey = GlobalKey<FormState>();
 
@@ -30,67 +31,72 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
   void addToWishlist(int amount, Game game) {
     if (wishlistGames.containsKey(game) &&
         game.type.toLowerCase() == 'digital') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Already in the Wishlist cannot add more Digital Editions',
-          ),
-        ),
-      );
+      setState(() {
+        error = 'Already in the Wishlist cannot add more Digital Editions';
+      });
       return;
     }
     if (wishlistGames.containsKey(game)) {
       setState(() {
+        error = null;
         wishlistGames[game] = wishlistGames[game]! + amount;
       });
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             'Added more ${amount.toString()} copies to the Wishlist',
           ),
+          duration: Duration(milliseconds: 1000),
         ),
       );
     } else {
       setState(() {
         wishlistGames[game] = amount;
+        error = null;
       });
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Added to wishlist')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Added to wishlist'),
+          duration: Duration(milliseconds: 1000),
+        ),
+      );
     }
   }
 
   void addToCart(int amount, Game game) {
     if (cartGames.containsKey(game) && game.type.toLowerCase() == 'digital') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Already in the Cart cannot add more Digital Editions'),
-        ),
-      );
+      setState(() {
+        error = 'Already in the Cart cannot add more Digital Editions';
+      });
       return;
     }
     // cheking if the key is in the list before adding
     if (cartGames.containsKey(game)) {
       // if exists update the amount
       setState(() {
+        error = null;
         cartGames[game] = cartGames[game]! + amount;
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Added more ${amount.toString()} copies to the Cart'),
+          duration: Duration(milliseconds: 1000),
         ),
       );
     } else {
       // else add the new item
       setState(() {
+        error = null;
         cartGames[game] = amount;
       });
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Added to Cart')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Added to Cart'),
+          duration: Duration(milliseconds: 1000),
+        ),
+      );
     }
   }
 
@@ -223,7 +229,13 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               }, Theme.of(context).colorScheme.secondary),
             ],
           ),
-
+          Padding(padding: EdgeInsets.only(bottom: 10)),
+          if (error != null)
+            Text(
+              error!,
+              style: TextStyle(color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
           // Row(
           //   children: [
           //     TextButton(
@@ -354,7 +366,13 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               }, Colors.black),
             ],
           ),
-
+          Padding(padding: EdgeInsets.only(bottom: 10)),
+          if (error != null)
+            Text(
+              error!,
+              style: TextStyle(color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
           // Row(
           //   children: [
           //     TextButton(

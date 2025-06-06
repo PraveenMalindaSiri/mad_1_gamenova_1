@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
 import 'package:mad_1_gamenova_1/core/games_lists.dart';
+import 'package:mad_1_gamenova_1/views/pages/payment.dart';
+import 'package:mad_1_gamenova_1/views/widgets/button.dart';
 import 'package:mad_1_gamenova_1/views/widgets/itemLanscape.dart';
 import 'package:mad_1_gamenova_1/views/widgets/itemPortrait.dart';
 
@@ -12,7 +14,9 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  bool agreed = false;
   double totalPrice = 0;
+  String? error;
 
   void remove(Game game) {
     setState(() {
@@ -20,10 +24,52 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 
+  void checkout(total) {
+    setState(() {
+      if (total == 0) {
+        error = "You cannot proceed to checkout with an empty cart";
+      } else if (!agreed) {
+        error = "You must agree with the terms and conditions.";
+      } else {
+        error = null;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return PaymentScreen();
+            },
+          ),
+        );
+      }
+    });
+  }
+
   Widget buildTotalPrice() {
-    return Text(
-      "Total Price: ${totalPrice.toString()}",
-      style: TextStyle(fontSize: 30),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              children: [
+                Checkbox(
+                  value: agreed,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      agreed = value ?? false;
+                    });
+                  },
+                ),
+                Text("Please agree with Terms and conditions"),
+              ],
+            ),
+            Text("Total Price: ${totalPrice.toString()}"),
+          ],
+        ),
+        MyButton("CHECK OUT", () => checkout(totalPrice), Colors.black),
+        Padding(padding: EdgeInsets.only(bottom: 10)),
+        if (error != null) Text(error!, style: TextStyle(color: Colors.red)),
+      ],
     );
   }
 

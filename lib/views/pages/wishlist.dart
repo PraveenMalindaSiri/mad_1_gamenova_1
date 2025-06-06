@@ -23,6 +23,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Already in the Cart cannot add more Digital Editions'),
+          duration: Duration(milliseconds: 1000),
         ),
       );
       return;
@@ -37,6 +38,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Added more ${amount.toString()} copies to the Cart'),
+          duration: Duration(milliseconds: 1000),
         ),
       );
     } else {
