@@ -67,8 +67,11 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
         MyButton("CHECK OUT", () => checkout(totalPrice), Colors.black),
-        Padding(padding: EdgeInsets.only(bottom: 10)),
-        if (error != null) Text(error!, style: TextStyle(color: Colors.red)),
+        if (error != null)
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(error!, style: TextStyle(color: Colors.red)),
+          ),
       ],
     );
   }

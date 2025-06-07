@@ -24,7 +24,10 @@ class ItemPortraitView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        decoration: BoxDecoration(color: AppColors.darkGray),
+        decoration: BoxDecoration(
+          color: AppColors.darkGray,
+          borderRadius: BorderRadius.circular(30),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,8 +48,8 @@ class ItemPortraitView extends StatelessWidget {
                   child: Image.asset(
                     game.image,
                     fit: BoxFit.fill,
-                    width: 300,
-                    height: 300,
+                    width: 200,
+                    height: 200,
                   ),
                 ),
               ),
@@ -70,9 +73,15 @@ class ItemPortraitView extends StatelessWidget {
               ],
             ),
             Padding(padding: EdgeInsets.only(bottom: 10)),
-            MyButton("Remove", onRemove, Colors.white),
-            if (isWishlist && onCart != null)
-              MyButton("Add to Cart", onCart!, Colors.black),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MyButton("Remove", onRemove, Colors.white),
+                if (isWishlist && onCart != null)
+                  MyButton("Add to Cart", onCart!, Colors.black),
+              ],
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 10)),
           ],
         ),
       ),

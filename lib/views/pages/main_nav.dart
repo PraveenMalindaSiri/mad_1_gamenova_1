@@ -44,7 +44,8 @@ class _MainNavScreenState extends State<MainNavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("GameNova", style: TextStyle(fontSize: 32))),
+        toolbarHeight: 40,
+        title: Center(child: Text("GameNova", style: TextStyle(fontSize: 30))),
       ),
       body: getPage(),
       bottomNavigationBar: Padding(
@@ -56,6 +57,7 @@ class _MainNavScreenState extends State<MainNavScreen> {
           },
           selectedItemColor: Theme.of(context).colorScheme.primary,
           unselectedItemColor: Colors.blueGrey,
+          elevation: 0,  // remove shadow
           backgroundColor: Theme.of(context).colorScheme.secondary,
           selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
           unselectedLabelStyle: TextStyle(color: Colors.grey),

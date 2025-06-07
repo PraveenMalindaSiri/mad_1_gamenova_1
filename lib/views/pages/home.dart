@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Text(
                       "See more...",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: AppColors.darkSkyBlue, fontSize: 18),
                     ),
                   ),
                 ],

@@ -89,7 +89,7 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
               "Physical Editions",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 24,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),

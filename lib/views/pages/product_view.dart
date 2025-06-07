@@ -108,6 +108,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
         child: TextFormField(
           controller: AmountCnt,
           keyboardType: TextInputType.number,
+          style: TextStyle(color: Colors.white), // input color
           validator: (value) {
             if (value == null || value.isEmpty) {
               return ("Please fill the Amount corectly.");
@@ -228,13 +229,13 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                   final amount = int.parse(AmountCnt.text);
                   addToWishlist(amount, widget.game);
                 }
-              }, Theme.of(context).colorScheme.secondary),
+              }, Colors.black),
               MyButton("Add To Cart", () {
                 if (formkey.currentState!.validate()) {
                   final amount = int.parse(AmountCnt.text);
                   addToCart(amount, widget.game);
                 }
-              }, Theme.of(context).colorScheme.secondary),
+              }, Colors.black),
             ],
           ),
           // Row(
@@ -269,6 +270,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
       decoration: BoxDecoration(color: AppColors.darkGray),
       child: Column(
         children: [
+          Padding(padding: EdgeInsets.only(bottom: 15)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -348,6 +350,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               ),
             ],
           ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           buildAmount(),
           Padding(padding: EdgeInsets.only(bottom: 10)),
           if (error != null)
@@ -356,7 +359,6 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               style: TextStyle(color: Colors.red),
               textAlign: TextAlign.center,
             ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -374,6 +376,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               }, Colors.black),
             ],
           ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           // Row(
           //   children: [
           //     TextButton(

@@ -89,7 +89,7 @@ class _DigitalScreenState extends State<DigitalScreen> {
               "Digital Editions",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 24,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),

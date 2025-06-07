@@ -27,7 +27,10 @@ class ItemLanscapeView extends StatelessWidget {
         alignment: Alignment.center,
         child: Container(
           constraints: BoxConstraints(maxWidth: 500),
-          decoration: BoxDecoration(color: AppColors.darkGray),
+          decoration: BoxDecoration(
+            color: AppColors.darkGray,
+            borderRadius: BorderRadius.circular(30),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -47,8 +50,7 @@ class ItemLanscapeView extends StatelessWidget {
                     child: Image.asset(
                       game.image,
                       fit: BoxFit.fill,
-                      width: 300,
-                      height: 300,
+                      height: 200,
                     ),
                   ),
                 ),
@@ -56,7 +58,7 @@ class ItemLanscapeView extends StatelessWidget {
               Column(
                 children: [
                   SizedBox(
-                    width: 120,
+                    width: 200,
                     child: Text(
                       game.name,
                       style: TextStyle(color: Colors.white, fontSize: 18),
