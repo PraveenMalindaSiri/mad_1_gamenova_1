@@ -60,10 +60,10 @@ class _CartScreenState extends State<CartScreen> {
                     });
                   },
                 ),
-                Text("Please agree with Terms and conditions"),
+                Text("Terms and conditions"),
               ],
             ),
-            Text("Total Price: ${totalPrice.toString()}"),
+            Text("Rs.${totalPrice.toString()}"),
           ],
         ),
         MyButton("CHECK OUT", () => checkout(totalPrice), Colors.black),

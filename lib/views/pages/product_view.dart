@@ -144,14 +144,15 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
       decoration: BoxDecoration(color: AppColors.darkGray),
       child: Column(
         children: [
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           Text(
             widget.game.name,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
           Text(
             "Rs.${widget.game.price}",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
           myIMG(widget.game.image),
@@ -212,6 +213,13 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
           Padding(padding: EdgeInsets.only(bottom: 10)),
           buildAmount(),
           Padding(padding: EdgeInsets.only(bottom: 10)),
+          if (error != null)
+            Text(
+              error!,
+              style: TextStyle(color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -229,13 +237,6 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               }, Theme.of(context).colorScheme.secondary),
             ],
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          if (error != null)
-            Text(
-              error!,
-              style: TextStyle(color: Colors.red),
-              textAlign: TextAlign.center,
-            ),
           // Row(
           //   children: [
           //     TextButton(
@@ -273,11 +274,11 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
             children: [
               Text(
                 widget.game.name,
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               Text(
                 "Rs.${widget.game.price}",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ],
           ),
@@ -349,6 +350,13 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
           ),
           buildAmount(),
           Padding(padding: EdgeInsets.only(bottom: 10)),
+          if (error != null)
+            Text(
+              error!,
+              style: TextStyle(color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -366,13 +374,6 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               }, Colors.black),
             ],
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          if (error != null)
-            Text(
-              error!,
-              style: TextStyle(color: Colors.red),
-              textAlign: TextAlign.center,
-            ),
           // Row(
           //   children: [
           //     TextButton(

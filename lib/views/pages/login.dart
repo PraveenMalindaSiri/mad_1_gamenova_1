@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? error;
 
-  Widget _buildHeader(context) {
+  Widget _buildHeader(double width) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Image.asset(
           "assets/images/main/login_img.png",
           fit: BoxFit.fill,
-          width: 400,
+          width: width,
         ),
       ),
     );
@@ -154,6 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth > 800) {
+                // landscape
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -165,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [_buildHeader(context), _buildFooter()],
+                            children: [_buildHeader(300), _buildFooter()],
                           ),
                           _buildForm(context),
                         ],
@@ -174,12 +175,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 );
               } else {
+                // portrait
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      _buildHeader(context),
+                      _buildHeader(400),
                       _buildForm(context),
                       _buildFooter(),
                     ],

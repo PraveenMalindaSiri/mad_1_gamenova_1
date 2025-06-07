@@ -16,18 +16,82 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final PassCnt = TextEditingController();
   final List<String> roles = ["Customer", "Admin", "Seller"];
   String? SelcRole = "Customer";
-  String? $success;
+  String? success;
 
   final formkey = GlobalKey<FormState>();
+
+  Widget buildAge(context, double width) {
+    return // age
+    SizedBox(
+      width: width,
+      child: TextFormField(
+        controller: AgeCnt,
+        keyboardType: TextInputType.number,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return ("Please fill the Age corectly.");
+          }
+
+          final age = int.tryParse(value);
+
+          if (age == null) {
+            return ("Age must be a number.");
+          }
+          if (age < 9) {
+            return ("Age must be higher than 9.");
+          }
+
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Age",
+          border: OutlineInputBorder(),
+        ),
+      ),
+    );
+  }
+
+  Widget buildRole(context, double width) {
+    return // role
+    SizedBox(
+      width: width,
+      child: DropdownButtonFormField(
+        value: "Customer", // default value
+        items:
+            roles.map((String role) {
+              return DropdownMenuItem(value: role, child: Text(role));
+            }).toList(),
+        onChanged: (String? value) {
+          setState(() {
+            SelcRole = value!;
+          });
+        },
+        validator: (value) {
+          if (value == null) {
+            return "Please select a Role";
+          } else {
+            return null;
+          }
+        },
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: "Select Role",
+          labelText: "Select Role",
+        ),
+      ),
+    );
+  }
 
   Widget _buildForm(context) {
     return Form(
       key: formkey,
       child: Column(
         children: [
+          Padding(padding: EdgeInsets.only(bottom: 30)),
+
           // username
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: UsernameCnt,
               validator: (value) {
@@ -49,7 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
           // password
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: PassCnt,
               validator: (value) {
@@ -72,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
           // fullname
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: NameCnt,
               validator: (value) {
@@ -94,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
           // email
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: EmailCnt,
               validator: (value) {
@@ -117,62 +181,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
 
-          // age
-          SizedBox(
-            width: 500,
-            child: TextFormField(
-              controller: AgeCnt,
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return ("Please fill the Age corectly.");
-                }
-
-                final age = int.tryParse(value);
-
-                if (age == null) {
-                  return ("Age must be a number.");
-                }
-                if (age < 9) {
-                  return ("Age must be higher than 9.");
-                }
-
-                return null;
-              },
-              decoration: InputDecoration(
-                hintText: "Age",
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-
-          // role
-          SizedBox(
-            width: 500,
-            child: DropdownButtonFormField(
-              value: "Customer", // default value
-              items:
-                  roles.map((String role) {
-                    return DropdownMenuItem(value: role, child: Text(role));
-                  }).toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  SelcRole = value!;
-                });
-              },
-              validator: (value) {
-                if (value == null) {
-                  return "Please select a Role";
-                } else {
-                  return null;
-                }
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Select Role",
-              ),
-            ),
+          // role and age builder
+          LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 800) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    buildAge(context, 190),
+                    SizedBox(width: 20),
+                    buildRole(context, 190),
+                  ],
+                );
+              } else {
+                return Column(
+                  children: [
+                    buildAge(context, 400),
+                    Padding(padding: EdgeInsets.only(bottom: 15)),
+                    buildRole(context, 400),
+                  ],
+                );
+              }
+            },
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
 
@@ -181,7 +211,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             onPressed: () {
               if (formkey.currentState!.validate()) {
                 setState(() {
-                  $success =
+                  success =
                       "'${NameCnt.text}' registered as '${UsernameCnt.text}' successfully and role is ${SelcRole!}";
                 });
               }
@@ -192,17 +222,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
 
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          if ($success != null)
-            Text(
-              $success!,
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
+          if (success != null)
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                success!,
+                style: TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
 
-          Padding(padding: EdgeInsets.only(bottom: 10)),
           TextButton(
             onPressed: () {
               Navigator.push(
@@ -222,9 +253,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
-          child: Column(
-            children: [_buildForm(context)],
-          ),
+          child: Column(children: [_buildForm(context)]),
         ),
       ),
     );
