@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/core/game.dart';
@@ -63,10 +65,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildEditionSection(String edition, List<Game> games) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        decoration: BoxDecoration(color: AppColors.darkGray),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.darkGray : Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: Offset(2, 4),
+            ),
+          ],
+        ),
         child: Column(
           children: [
             Padding(
@@ -77,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     edition,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: isDark ? Colors.white : Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -94,7 +107,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Text(
                       "See more...",
-                      style: TextStyle(color: AppColors.darkSkyBlue, fontSize: 18),
+                      style: TextStyle(
+                        color: AppColors.darkSkyBlue,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ],

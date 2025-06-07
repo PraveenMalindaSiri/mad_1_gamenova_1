@@ -32,10 +32,21 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
   }
 
   Widget _buildGenreSection(String title, List<Game> games) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        decoration: BoxDecoration(color: AppColors.darkGray),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.darkGray : Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(2, 4),
+            ),
+          ],
+        ),
         child: Column(
           children: [
             Padding(
@@ -43,7 +54,7 @@ class _PhysicalScreenState extends State<PhysicalScreen> {
               child: Text(
                 title,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: isDark ? Colors.white : Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

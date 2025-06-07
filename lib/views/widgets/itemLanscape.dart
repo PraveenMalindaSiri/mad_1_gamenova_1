@@ -21,6 +21,7 @@ class ItemLanscapeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
@@ -28,8 +29,16 @@ class ItemLanscapeView extends StatelessWidget {
         child: Container(
           constraints: BoxConstraints(maxWidth: 500),
           decoration: BoxDecoration(
-            color: AppColors.darkGray,
+            color: isDark ? AppColors.darkGray : Colors.white,
             borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black54,
+                spreadRadius: 4,
+                blurRadius: 10,
+                offset: Offset(2, 4),
+              ),
+            ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -47,10 +56,19 @@ class ItemLanscapeView extends StatelessWidget {
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: Image.asset(
-                      game.image,
-                      fit: BoxFit.fill,
-                      height: 200,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 2,
+                        ), // ⬅️ Black border
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Image.asset(
+                        game.image,
+                        fit: BoxFit.fill,
+                        height: 200,
+                      ),
                     ),
                   ),
                 ),
@@ -61,20 +79,36 @@ class ItemLanscapeView extends StatelessWidget {
                     width: 200,
                     child: Text(
                       game.name,
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Text(
-                    amount.toString(),
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    "x ${amount}",
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     "Rs.${game.price * amount}",
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 10)),
-                  MyButton("Remove", onRemove, Colors.white),
+                  MyButton(
+                    "Remove",
+                    onRemove,
+                    isDark ? Colors.white : Colors.black,
+                  ),
                   Padding(padding: EdgeInsets.only(bottom: 10)),
                   if (isWishlist && onCart != null)
                     MyButton("Add to Cart", onCart!, Colors.black),

@@ -16,6 +16,69 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   final formkey = GlobalKey<FormState>();
 
+  Widget buildDate(context, double width) {
+    return SizedBox(
+      width: width,
+      child: TextFormField(
+        controller: ExpireDate,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return ("Enter the Expire Date.");
+          }
+          if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(value)) {
+            return "YYYY-MM-DD format only.";
+          }
+
+          final date = DateTime.tryParse(value);
+          final now = DateTime.now();
+
+          if (date == null) {
+            return ("Numbers only.");
+          }
+          if (date.isBefore(now)) {
+            return "Date must be in the future";
+          }
+
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Expire Date",
+          border: OutlineInputBorder(),
+        ),
+      ),
+    );
+  }
+
+  Widget buildSecNo(context, double width) {
+    return SizedBox(
+      width: width,
+      child: TextFormField(
+        controller: SecNo,
+        keyboardType: TextInputType.number,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return ("Enter the Security No.");
+          }
+
+          final sec = int.tryParse(value);
+
+          if (sec == null) {
+            return ("Numbers Only");
+          }
+          if (SecNo.text.length != 3) {
+            return ("Accept only 4 digits");
+          }
+
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Security No.",
+          border: OutlineInputBorder(),
+        ),
+      ),
+    );
+  }
+
   Widget _buildForm(context) {
     return Form(
       key: formkey,
@@ -23,7 +86,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         children: [
           // name
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: CardHolder,
               validator: (value) {
@@ -45,7 +108,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
           // card no
           SizedBox(
-            width: 500,
+            width: 400,
             child: TextFormField(
               controller: CardNo,
               keyboardType: TextInputType.number,
@@ -73,69 +136,29 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
 
-          // Expire date
-          SizedBox(
-            width: 500,
-            child: TextFormField(
-              controller: ExpireDate,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return ("Please fill the Expire Date corectly.");
-                }
-                if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(value)) {
-                  return "Date must be in YYYY-MM-DD format.";
-                }
-
-                final date = DateTime.tryParse(value);
-                final now = DateTime.now();
-
-                if (date == null) {
-                  return ("Expire Date must be a number.");
-                }
-                if (date.isBefore(now)) {
-                  return "Date must be in the future";
-                }
-
-                return null;
-              },
-              decoration: InputDecoration(
-                hintText: "Expire Date (YYYY-MM-DD)",
-                border: OutlineInputBorder(),
-              ),
-            ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 800) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    buildDate(context, 200),
+                    SizedBox(width: 20),
+                    buildSecNo(context, 180),
+                  ],
+                );
+              } else {
+                return Column(
+                  children: [
+                    buildDate(context, 400),
+                    Padding(padding: EdgeInsets.only(bottom: 15)),
+                    buildSecNo(context, 400),
+                  ],
+                );
+              }
+            },
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
-
-          // Security No.
-          SizedBox(
-            width: 500,
-            child: TextFormField(
-              controller: SecNo,
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return ("Please fill the Security No. corectly.");
-                }
-
-                final sec = int.tryParse(value);
-
-                if (sec == null) {
-                  return ("Security No. must be a number.");
-                }
-                if (SecNo.text.length != 3) {
-                  return ("Security No. must have 3 numbers.");
-                }
-
-                return null;
-              },
-              decoration: InputDecoration(
-                hintText: "Security No.",
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-
           // button
           ElevatedButton(
             onPressed: () {
@@ -169,6 +192,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 40,
+        title: Center(child: Text("GameNova", style: TextStyle(fontSize: 30))),
+      ),
       body: Center(child: SingleChildScrollView(child: _buildForm(context))),
     );
   }

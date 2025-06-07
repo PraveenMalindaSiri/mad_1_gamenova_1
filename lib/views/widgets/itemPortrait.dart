@@ -21,12 +21,21 @@ class ItemPortraitView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.darkGray,
+          color: isDark ? AppColors.darkGray : Colors.white,
           borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: Offset(2, 4),
+            ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -45,30 +54,51 @@ class ItemPortraitView extends StatelessWidget {
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  child: Image.asset(
-                    game.image,
-                    fit: BoxFit.fill,
-                    width: 200,
-                    height: 200,
+                  // in a container to give a border
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 2,
+                      ), // ⬅️ Black border
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Image.asset(
+                      game.image,
+                      fit: BoxFit.fill,
+                      height: 200,
+                    ),
                   ),
                 ),
               ),
             ),
             Text(
               game.name,
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(
+                color: isDark ? Colors.white : Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Padding(padding: EdgeInsets.only(bottom: 10)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  amount.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  "x ${amount}",
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   "Rs.${game.price * amount}",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  style: TextStyle(
+                    color: isDark ? Colors.white : Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
