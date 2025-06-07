@@ -57,10 +57,7 @@ class ItemPortraitView extends StatelessWidget {
                   // in a container to give a border
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2,
-                      ), // ⬅️ Black border
+                      border: Border.all(color: Colors.black, width: 2),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Image.asset(
@@ -74,11 +71,9 @@ class ItemPortraitView extends StatelessWidget {
             ),
             Text(
               game.name,
-              style: TextStyle(
-                color: isDark ? Colors.white : Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
             ),
             Padding(padding: EdgeInsets.only(bottom: 10)),
             Row(
@@ -86,19 +81,15 @@ class ItemPortraitView extends StatelessWidget {
               children: [
                 Text(
                   "x ${amount}",
-                  style: TextStyle(
-                    color: isDark ? Colors.white : Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Rs.${game.price * amount}",
-                  style: TextStyle(
-                    color: isDark ? Colors.white : Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),

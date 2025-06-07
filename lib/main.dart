@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.black,
           foregroundColor: AppColors.skyBlue,
         ),
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: Colors.white, fontSize: 20),
+          bodySmall: TextStyle(color: Colors.white, fontSize: 18),
+        ),
       ),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -35,7 +39,11 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.skyBlue,
-          foregroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: Colors.black, fontSize: 20),
+          bodySmall: TextStyle(color: Colors.black, fontSize: 18),
         ),
       ),
       home: LoginScreen(),

@@ -53,11 +53,9 @@ class _DigitalScreenState extends State<DigitalScreen> {
               padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
               child: Text(
                 title,
-                style: TextStyle(
-                  color: isDark ? Colors.white : Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             Padding(padding: EdgeInsets.only(bottom: 10)),

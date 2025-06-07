@@ -58,10 +58,7 @@ class ItemLanscapeView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 2,
-                        ), // ⬅️ Black border
+                        border: Border.all(color: Colors.black, width: 2),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Image.asset(
@@ -79,9 +76,7 @@ class ItemLanscapeView extends StatelessWidget {
                     width: 200,
                     child: Text(
                       game.name,
-                      style: TextStyle(
-                        color: isDark ? Colors.white : Colors.black,
-                        fontSize: 20,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
@@ -89,17 +84,13 @@ class ItemLanscapeView extends StatelessWidget {
                   ),
                   Text(
                     "x ${amount}",
-                    style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black,
-                      fontSize: 18,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     "Rs.${game.price * amount}",
-                    style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black,
-                      fontSize: 18,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),

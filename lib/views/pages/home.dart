@@ -89,9 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     edition,
-                    style: TextStyle(
-                      color: isDark ? Colors.white : Colors.black,
-                      fontSize: 20,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
