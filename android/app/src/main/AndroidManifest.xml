@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="mad_1_gamenova_1"
+        android:label="GameNova"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
