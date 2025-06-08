@@ -43,18 +43,16 @@ class _MainNavScreenState extends State<MainNavScreen> {
   }
 
   Widget drawerItem(String text, int index) {
-    return Container(
-      child: TextButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MainNavScreen(selectPageIndex: index),
-            ),
-          );
-        },
-        child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
-      ),
+    return TextButton(
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainNavScreen(selectPageIndex: index),
+          ),
+        );
+      },
+      child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
     );
   }
 
@@ -86,27 +84,25 @@ class _MainNavScreenState extends State<MainNavScreen> {
                 padding: const EdgeInsets.all(10),
                 child: drawerItem("Cart", 3),
               ),
-              Container(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
-                    );
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Log-Out",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: AppColors.darkSkyBlue,
-                        ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Log-Out",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.darkSkyBlue,
                       ),
-                      SizedBox(width: 5,),
-                      Icon(Icons.logout, size: 22,),
-                    ],
-                  ),
+                    ),
+                    SizedBox(width: 5,),
+                    Icon(Icons.logout, size: 22,),
+                  ],
                 ),
               ),
             ],

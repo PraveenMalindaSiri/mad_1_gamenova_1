@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/views/pages/login.dart';
 
@@ -231,6 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
 

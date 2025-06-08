@@ -83,7 +83,7 @@ class ItemLanscapeView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "x ${amount}",
+                    "x $amount",
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

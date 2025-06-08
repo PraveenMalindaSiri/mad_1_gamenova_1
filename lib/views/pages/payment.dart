@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -183,6 +185,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
         ],
       ),

@@ -57,7 +57,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
   Widget build(BuildContext context) {
     final entries = wishlistGames.entries.toList();
     if (entries.isEmpty) {
-      return Center(child: Container(child: Text("No Wishlist Items")));
+      return Center(child: Text("No Wishlist Items"));
     } else {
       return Scaffold(
         body: LayoutBuilder(

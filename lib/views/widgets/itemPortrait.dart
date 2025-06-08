@@ -80,7 +80,7 @@ class ItemPortraitView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "x ${amount}",
+                  "x $amount",
                   style: Theme.of(
                     context,
                   ).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),

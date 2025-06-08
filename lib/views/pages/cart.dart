@@ -84,7 +84,7 @@ class _CartScreenState extends State<CartScreen> {
       totalPrice += (entry.key.price * entry.value);
     });
     if (entries.isEmpty) {
-      return Center(child: Container(child: Text("No Cart Items")));
+      return Center(child: Text("No Cart Items"));
     } else {
       return Scaffold(
         body: Column(

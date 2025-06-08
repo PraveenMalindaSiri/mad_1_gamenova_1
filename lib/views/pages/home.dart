@@ -16,48 +16,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   Widget _buildIntro() {
     return Column(
       children: [
         Padding(padding: EdgeInsets.only(bottom: 10)),
         Container(
-          child: Container(
-            width: double.infinity,
-            height: 500,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/main/main_img2.png'),
-                fit: BoxFit.fitWidth,
+          width: double.infinity,
+          height: 500,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/main/main_img2.png'),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          child: Column(
+            children: [
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  "Welcome to GameNova",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                Padding(padding: EdgeInsets.only(bottom: 10)),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    "Welcome to GameNova",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              Center(
+                child: Text(
+                  'Level up your game collection now. Buy physical or digital edition of your next game. No region locks. No other barriers. Just pure gaming vibe. Gear up and game on!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w300,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10)),
-                Center(
-                  child: Text(
-                    'Level up your game collection now. Buy physical or digital edition of your next game. No region locks. No other barriers. Just pure gaming vibe. Gear up and game on!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w300,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/views/pages/main_nav.dart';
 import 'package:mad_1_gamenova_1/views/pages/register.dart';
@@ -104,7 +106,12 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
-          if (error != null) Text(error!),
+          if (error != null)
+            Text(
+              error!,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.red),
+            ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
           ElevatedButton(
             onPressed: () {
