@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_1_gamenova_1/core/colors.dart';
 import 'package:mad_1_gamenova_1/views/pages/cart.dart';
 import 'package:mad_1_gamenova_1/views/pages/home.dart';
 import 'package:mad_1_gamenova_1/views/pages/login.dart';
@@ -93,9 +94,18 @@ class _MainNavScreenState extends State<MainNavScreen> {
                       MaterialPageRoute(builder: (context) => LoginScreen()),
                     );
                   },
-                  child: Text(
-                    "Log-Out",
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Log-Out",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: AppColors.darkSkyBlue,
+                        ),
+                      ),
+                      SizedBox(width: 5,),
+                      Icon(Icons.logout, size: 22,),
+                    ],
                   ),
                 ),
               ),
