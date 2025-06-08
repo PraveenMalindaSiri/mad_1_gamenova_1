@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1_gamenova_1/views/pages/cart.dart';
 import 'package:mad_1_gamenova_1/views/pages/home.dart';
+import 'package:mad_1_gamenova_1/views/pages/login.dart';
 import 'package:mad_1_gamenova_1/views/pages/products_screen.dart';
 import 'package:mad_1_gamenova_1/views/pages/wishlist.dart';
 
@@ -40,12 +41,67 @@ class _MainNavScreenState extends State<MainNavScreen> {
     }
   }
 
+  Widget drawerItem(String text, int index) {
+    return Container(
+      child: TextButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MainNavScreen(selectPageIndex: index),
+            ),
+          );
+        },
+        child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
         title: Center(child: Text("GameNova", style: TextStyle(fontSize: 30))),
+      ),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 60),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: drawerItem("Home", 0),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: drawerItem("Games", 1),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: drawerItem("Wishlist", 2),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: drawerItem("Cart", 3),
+              ),
+              Container(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Log-Out",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       body: getPage(),
       bottomNavigationBar: Padding(
@@ -57,7 +113,7 @@ class _MainNavScreenState extends State<MainNavScreen> {
           },
           selectedItemColor: Theme.of(context).colorScheme.primary,
           unselectedItemColor: Colors.blueGrey,
-          elevation: 0,  // remove shadow
+          elevation: 0, // remove shadow
           backgroundColor: Theme.of(context).colorScheme.secondary,
           selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
           unselectedLabelStyle: TextStyle(color: Colors.grey),

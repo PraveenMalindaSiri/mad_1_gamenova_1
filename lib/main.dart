@@ -29,6 +29,13 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.white, fontSize: 20),
           bodySmall: TextStyle(color: Colors.white, fontSize: 18),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          errorStyle: TextStyle(
+            fontSize: 14,
+            // color: Colors.red,
+            // fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -44,6 +51,13 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
           bodyMedium: TextStyle(color: Colors.black, fontSize: 20),
           bodySmall: TextStyle(color: Colors.black, fontSize: 18),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          errorStyle: TextStyle(
+            fontSize: 14,
+            // color: Colors.red,
+            // fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       home: LoginScreen(),
