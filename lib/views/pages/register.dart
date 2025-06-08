@@ -29,16 +29,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
         keyboardType: TextInputType.number,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return ("Please fill the Age corectly.");
+            return ("Enter the Age.");
           }
 
           final age = int.tryParse(value);
 
           if (age == null) {
-            return ("Age must be a number.");
+            return ("Numbers only.");
           }
           if (age < 9) {
-            return ("Age must be higher than 9.");
+            return ("Enter 9 or above.");
           }
 
           return null;
