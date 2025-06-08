@@ -17,17 +17,22 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
   final AmountCnt = TextEditingController(text: "1");
   final formkey = GlobalKey<FormState>();
 
-  Widget myIMG(String path) {
+  Widget myIMG(String path, double width, double height) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 2),
-            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: Colors.black, width: 3),
+            borderRadius: BorderRadius.circular(10),
           ),
-          child: Image.asset(path, fit: BoxFit.fill, width: 300, height: 300),
+          child: Image.asset(
+            path,
+            fit: BoxFit.fill,
+            width: width,
+            height: height,
+          ),
         ),
       ),
     );
@@ -155,8 +160,37 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Text(
           text,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'font1',
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget buildDetails(String topic, String text) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            topic,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall!.copyWith(fontFamily: 'font1'),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            text,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall!.copyWith(fontFamily: 'font1'),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
@@ -167,57 +201,90 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
       child: Column(
         children: [
           Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(widget.game.name, style: Theme.of(context).textTheme.bodyMedium),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(
-            "Rs.${widget.game.price}",
-            style: Theme.of(context).textTheme.bodyMedium,
+
+          // name
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              widget.game.name,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontSize: 24),
+            ),
           ),
+
+          // price
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              "Rs.${widget.game.price}",
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontSize: 24),
+            ),
+          ),
+
+          // img
+          myIMG(widget.game.image, 300, 300),
           Padding(padding: EdgeInsets.only(bottom: 10)),
-          myIMG(widget.game.image),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+          // stickers
+          Column(
             children: [
-              buildSticker('${widget.game.type} Edition'),
-              buildSticker('${widget.game.genre} games'),
-              buildSticker(widget.game.platform),
-              buildSticker('${widget.game.ageRating}+'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  buildSticker('${widget.game.type} Edition'),
+                  buildSticker('${widget.game.genre} games'),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  buildSticker(widget.game.platform),
+                  buildSticker('${widget.game.ageRating}+'),
+                ],
+              ),
             ],
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(
-            widget.game.description,
-            style: Theme.of(context).textTheme.bodySmall,
-            textAlign: TextAlign.center,
+
+          // description
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              widget.game.description,
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(fontFamily: 'font2'),
+              textAlign: TextAlign.center,
+            ),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(
-            "Released Date: ${widget.game.releasedDate}",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
+
+          // details
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: buildDetails("Released Date:", widget.game.releasedDate),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(
-            "Size: ${widget.game.size}",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: buildDetails("Size:", "${widget.game.size}GB"),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(
-            "Company: ${widget.game.company}",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: buildDetails("Company:", widget.game.company),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(
-            "Duration: ${widget.game.duration}",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: buildDetails("Duration:", "${widget.game.duration}H"),
           ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
+
+          // amount
           buildAmount(),
           Padding(padding: EdgeInsets.only(bottom: 10)),
+
+          // error
           if (error != null)
             Text(
               error!,
@@ -225,6 +292,8 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
               textAlign: TextAlign.center,
             ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
+
+          // buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -243,157 +312,145 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
             ],
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
-          // Row(
-          //   children: [
-          //     TextButton(
-          //       onPressed: () {
-          //         Navigator.pushReplacement(
-          //           context,
-          //           MaterialPageRoute(builder: (context) => WishlistScreen()),
-          //         );
-          //       },
-          //       child: Text("Wishlist"),
-          //     ),
-          //     TextButton(
-          //       onPressed: () {
-          //         Navigator.pushReplacement(
-          //           context,
-          //           MaterialPageRoute(builder: (context) => CartScreen()),
-          //         );
-          //       },
-          //       child: Text("Cart"),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );
   }
 
   Widget buildLandscape() {
-    return Container(
-      decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
-      child: Column(
-        children: [
-          Padding(padding: EdgeInsets.only(bottom: 15)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                widget.game.name,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              Text(
-                "Rs.${widget.game.price}",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
-          ),
-          myIMG(widget.game.image),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              buildSticker('${widget.game.type} Edition'),
-              buildSticker('${widget.game.genre} games'),
-              buildSticker(widget.game.platform),
-              buildSticker('${widget.game.ageRating}+'),
-            ],
-          ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          Text(
-            widget.game.description,
-            style: Theme.of(context).textTheme.bodySmall,
-            textAlign: TextAlign.center,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  Padding(padding: EdgeInsets.only(bottom: 10)),
-                  Text(
-                    "Released Date: ${widget.game.releasedDate}",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall,
+    return SingleChildScrollView(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              children: [
+                // IMG
+                myIMG(widget.game.image, 250, 250),
+
+                // stickers
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildSticker('${widget.game.type} Edition'),
+                          buildSticker('${widget.game.genre} games'),
+                        ],
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 10)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildSticker(widget.game.platform),
+                          buildSticker('${widget.game.ageRating}+'),
+                        ],
+                      ),
+                    ],
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 10)),
-                  Text(
-                    "Size: ${widget.game.size}",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Padding(padding: EdgeInsets.only(bottom: 10)),
-                  Text(
-                    "Company: ${widget.game.company}",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Padding(padding: EdgeInsets.only(bottom: 10)),
-                  Text(
-                    "Duration: ${widget.game.duration}",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Padding(padding: EdgeInsets.only(bottom: 10)),
-                ],
-              ),
-            ],
-          ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          buildAmount(),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          if (error != null)
-            Text(
-              error!,
-              style: TextStyle(color: Colors.red),
-              textAlign: TextAlign.center,
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 20)),
+              ],
             ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              MyButton("Add To Wishlist", () {
-                if (formkey.currentState!.validate()) {
-                  final amount = int.parse(AmountCnt.text);
-                  addToWishlist(amount, widget.game);
-                }
-              }, Colors.black),
-              MyButton("Add To Cart", () {
-                if (formkey.currentState!.validate()) {
-                  final amount = int.parse(AmountCnt.text);
-                  addToCart(amount, widget.game);
-                }
-              }, Colors.black),
-            ],
-          ),
-          Padding(padding: EdgeInsets.only(bottom: 10)),
-          // Row(
-          //   children: [
-          //     TextButton(
-          //       onPressed: () {
-          //         Navigator.pushReplacement(
-          //           context,
-          //           MaterialPageRoute(builder: (context) => WishlistScreen()),
-          //         );
-          //       },
-          //       child: Text("Wishlist"),
-          //     ),
-          //     TextButton(
-          //       onPressed: () {
-          //         Navigator.pushReplacement(
-          //           context,
-          //           MaterialPageRoute(builder: (context) => CartScreen()),
-          //         );
-          //       },
-          //       child: Text("Cart"),
-          //     ),
-          //   ],
-          // ),
-        ],
+            Column(
+              children: [
+                Padding(padding: EdgeInsets.only(bottom: 10)),
+
+                // name
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 1.0),
+                  child: Text(
+                    widget.game.name,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(fontSize: 24),
+                  ),
+                ),
+
+                // price
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                    "Rs.${widget.game.price}",
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(fontSize: 24),
+                  ),
+                ),
+
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: buildDetails(
+                          "Released Date:",
+                          widget.game.releasedDate,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: buildDetails("Size:", "${widget.game.size}GB"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: buildDetails("Company:", widget.game.company),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: buildDetails(
+                          "Duration:",
+                          "${widget.game.duration}H",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // amount input
+                buildAmount(),
+                Padding(padding: EdgeInsets.only(bottom: 10)),
+
+                // error
+                if (error != null)
+                  Text(
+                    error!,
+                    style: TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
+
+                // buttons
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MyButton("Add To Wishlist", () {
+                        if (formkey.currentState!.validate()) {
+                          final amount = int.parse(AmountCnt.text);
+                          addToWishlist(amount, widget.game);
+                        }
+                      }, Colors.black),
+                      MyButton("Add To Cart", () {
+                        if (formkey.currentState!.validate()) {
+                          final amount = int.parse(AmountCnt.text);
+                          addToCart(amount, widget.game);
+                        }
+                      }, Colors.black),
+                    ],
+                  ),
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 20)),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
