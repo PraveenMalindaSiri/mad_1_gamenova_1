@@ -16,11 +16,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
   Widget _buildIntro() {
     return Column(
       children: [
         Padding(padding: EdgeInsets.only(bottom: 10)),
+
+        // bg img
         Container(
           width: double.infinity,
           height: 500,
@@ -32,19 +33,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.only(bottom: 10)),
+              Padding(padding: EdgeInsets.only(bottom: 20)),
+
+              // Top Welcome
               Align(
                 alignment: Alignment.topCenter,
                 child: Text(
                   "Welcome to GameNova",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.primary,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Padding(padding: EdgeInsets.only(bottom: 10)),
+
+              // Intro
               Center(
                 child: Text(
                   'Level up your game collection now. Buy physical or digital edition of your next game. No region locks. No other barriers. Just pure gaming vibe. Gear up and game on!',
@@ -57,6 +62,68 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildIntroLand() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width * 0.6,
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.darkGray : Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black54,
+                spreadRadius: 4,
+                blurRadius: 10,
+                offset: Offset(2, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  "Welcome to GameNova",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Center(
+                  child: Text(
+                    'Level up your game collection now. Buy physical or digital edition of your next game. No region locks. No other barriers. Just pure gaming vibe. Gear up and game on!',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(23),
+            child: Image.asset(
+              "assets/images/main/main_img.png",
+              fit: BoxFit.fill,
+              width: MediaQuery.of(context).size.width * 0.3,
+              color:  !isDark ? AppColors.darkGray : Colors.white,
+              
+            ),
           ),
         ),
       ],
@@ -146,12 +213,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildIntro(),
-            _buildEditionSection('Physical Editions', pGames),
-            _buildEditionSection("Digital Editions", dGames),
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth < 700) {
+              return Column(
+                children: [
+                  _buildIntro(),
+                  _buildEditionSection('Physical Editions', pGames),
+                  _buildEditionSection("Digital Editions", dGames),
+                ],
+              );
+            } else {
+              return Column(
+                children: [
+                  _buildIntroLand(),
+                  _buildEditionSection('Physical Editions', pGames),
+                  _buildEditionSection("Digital Editions", dGames),
+                ],
+              );
+            }
+          },
         ),
       ),
     );
